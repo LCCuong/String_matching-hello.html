@@ -23,7 +23,7 @@ int n <- độ dài của chuỗi txt
 Khởi tạo mảng số nguyên lps có m phần tử đều bằng 0
 
 int len <- 0	//biến len để theo dõi prefix dài nhất cũng đồng thời là suffix
-for i <- 1 to m do:
+for i <- 1 to (m-1) do:
 	if (pat[i] == pat[len]):
 		len <- len + 1
 		lps[i] <- len
@@ -45,7 +45,3 @@ while i<n do:
 		if (j >= m):
 			In ra vị trí tìm thấy là (i - m)
 			j = lps[j-1]
-
-			
-	
-
