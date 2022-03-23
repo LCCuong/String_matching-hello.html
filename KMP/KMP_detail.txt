@@ -44,4 +44,4 @@ while i<n do:
 		j <- j+1
 		if (j >= m):
 			In ra vị trí tìm thấy là (i - m)
-			j = lps[j-1]
+			j <- lps[j-1]
