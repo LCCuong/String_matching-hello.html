@@ -1,0 +1,51 @@
+MÔ TẢ CHI TIẾT THUẬT TOÁN KMP
+
+----------------------------------------------------
+
+Input: 
+String txt: văn bản
+String pat: xâu mẫu
+
+Output: Các vị trí xuất hiện của pat trong txt
+
+-----------------------------------------------------
+
+Mã giả:
+-------
+
+Nhập 2 chuỗi txt và pat
+
+int m <- độ dài của chuỗi pat
+int n <- độ dài của chuỗi txt
+--------------------------------------
+//TẠO MẢNG lps (longest prefix which is also suffix)
+
+Khởi tạo mảng số nguyên lps có m phần tử đều bằng 0
+
+int len <- 0	//biến len để theo dõi prefix dài nhất cũng đồng thời là suffix
+for i <- 1 to m do:
+	if (pat[i] == pat[len]):
+		len <- len + 1
+		lps[i] <- len
+	else:
+		if (len != 0):
+			len <- lps[len-1]
+----------------------------------------
+//SO KHỚP
+int i <- 0, j <-0
+while i<n do:
+	if (i<n và txt[i] != pat[j]):
+		if (j != 0):
+			j <- lps[j-1]
+		else:
+			i <- i+1
+	else:
+		i <- i+1
+		j <- j+1
+		if (j >= m):
+			In ra vị trí tìm thấy là (i - m)
+			j = lps[j-1]
+
+			
+	
+
