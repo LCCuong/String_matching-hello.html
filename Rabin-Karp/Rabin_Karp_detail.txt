@@ -1,0 +1,65 @@
+MÔ TẢ CHI TIẾT THUẬT TOÁN RABIN-KARP
+
+----------------------------------------------------
+
+Input: 
+String txt: văn bản
+String pat: xâu mẫu
+
+Output: Các vị trí xuất hiện của pat trong txt
+
+-----------------------------------------------------
+
+Mã giả:
+-------
+
+Tạo biến hằng base = 311	//người lập trình có thể chọn giá trị khác cho base
+Tạo biến hằng MOD = 10003	//người lập trình có thể chọn giá trị khác cho MOD
+
+Nhập 2 chuỗi txt và pat
+
+int m <- độ dài của chuỗi pat
+int n <- độ dài của chuỗi txt
+
+//thêm kí tự đệm ở đầu txt và pat để tiện cho việc xử lí sau này
+txt <- " " + txt
+pat <- " " + pat
+
+--------------------------------------
+//TẠO MẢNG pow LƯU CÁC GIÁ TRỊ LŨY THỪA CỦA base
+
+Khởi tạo mảng số nguyên pow với pow[0] <- 1
+
+for i <- 1 to n do:
+	pow[i] <- (pow[i-1]*base)%MOD
+
+--------------------------------------
+//TẠO MẢNG hash_value VỚI hash_value[i] LƯU GIÁ TRỊ HASH CỦA XÂU CON txt[0..i] (không tính ký tự " " ở đầu)
+ 
+Khởi tạo mảng số nguyên hash_value với hash_value[0] <- 0
+
+for i <- 1 to n do:
+	hash_value[i] <- ((hash_value[i-1]*base)%MOD +txt[i])%MOD
+	
+----------------------------------------
+//TÍNH hash_value CỦA pat
+
+long long HashOfPat <- 0 (kiểu số nguyên long long của C++)
+
+for i <- 1 to m do:
+	HashOfPat <- ((HashOfPat*base)%MOD + pat[i])%MOD
+
+----------------------------------------
+//SO KHỚP
+
+for i <- 1 to (n-m+1) do:
+	if (HashOfPat == ((hash_value[i+m-1] - (hash_value[i-1]*(pow[m]%MOD))%MOD + MOD*MOD)%MOD)):
+		
+		//kiểm tra lại để chắc chắn 2 xâu có cùng giá trị hash khớp với nhau
+		int k <- 1, j <-i
+		while (k<=m và pat[k] == txt[j+k-1]):
+			k <- k+1;
+		
+		if (k>m):
+			In ra vị trí tìm thấy là (i-1) //không tính kí tự " " đã thêm vào
+	
